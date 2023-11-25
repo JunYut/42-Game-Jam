@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhvqcvks2et7i"]
+
+[ext_resource type="Texture2D" uid="uid://bay4yht8giw0h" path="res://Free/Main Characters/Mask Dude/Jump (32x32).png" id="1_h16ee"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_op7ry"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jdrd0"]
+
+[node name="enemy" type="CharacterBody2D"]
+input_pickable = true
+script = ExtResource("1_op7ry")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_jdrd0")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+texture = ExtResource("1_h16ee")
+metadata/_edit_lock_ = true
