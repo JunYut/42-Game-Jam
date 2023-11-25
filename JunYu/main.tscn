@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cunrnm66ns2ix"]
 
-[ext_resource type="PackedScene" uid="uid://b4llu3g5bo8d5" path="res://JunYu/background.tscn" id="1_pfmlk"]
-[ext_resource type="PackedScene" uid="uid://cfqfx52mqs3oe" path="res://JunYu/player.tscn" id="2_um8x0"]
+[ext_resource type="PackedScene" uid="uid://b4llu3g5bo8d5" path="res://background.tscn" id="1_pfmlk"]
+[ext_resource type="PackedScene" uid="uid://cfqfx52mqs3oe" path="res://player.tscn" id="2_um8x0"]
 
 [node name="Node2D" type="Node2D"]
 
