@@ -1,18 +1,16 @@
 extends Area2D
 
-var speed = 300
 
+var speed = 300
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	translate(Vector2(speed * delta, 0))
-	
-func set_linear_velocity(velocity: Vector2):
-	position += velocity * get_physics_process_delta_time()
+	position.x += (speed * delta)
 
-func _destroy_projectile(_area):
-	pass # Replace with function body.
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	print("Exited the screen")
+	queue_free()
 
-
-func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	print("DEBUG")
-	self.queue_free()
+func _on_area_entered(_area):
+	print("Entered the area")
+	queue_free()

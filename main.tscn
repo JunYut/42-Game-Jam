@@ -7,9 +7,14 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="player" parent="." instance=ExtResource("2_um8x0")]
-position = Vector2(1125, 623)
+position = Vector2(1088, 632)
 
 [node name="background" parent="." instance=ExtResource("1_pfmlk")]
+metadata/_edit_lock_ = true
 
 [node name="enemy" parent="." instance=ExtResource("3_xigvj")]
-position = Vector2(948, 626)
+position = Vector2(792, 632)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 352)
+zoom = Vector2(1.505, 1.535)
