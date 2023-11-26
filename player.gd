@@ -1,18 +1,21 @@
 extends CharacterBody2D
 
-
+# Variables
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var projectile
-var can_parry = false
+var parry_window = 0.5
+var double_jump = 1
 var is_alive = true
 
-func _physics_process(delta):
-	can_parry = false
+# Preparations
+func  _ready():
+	pass
 	
+	
+# In game events
+func _physics_process(delta):
 	if not is_alive:
 		_respawn()
 
@@ -38,26 +41,34 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
+# Functions
 func _parry():
-	#$Parry/CollisionShape2D.disabled = 0
-	print("parry!")
-	if can_parry:
-		projectile.position.x *= -1
-		velocity.y = JUMP_VELOCITY
+	$Marker2D/Parry/CollisionShape2D.disabled = false
+	$"Marker2D/Parry/Parry window".start(parry_window)
+
 
 func _respawn():
 	get_tree().reload_current_scene()
+
 
 func _die():
 	is_alive = false
 	queue_free()
 
-func _on_hitbox_area_entered(_area):
-	if _area.is_in_group("projectile"):
+# Signals
+func _on_hitbox_area_entered(area):
+	if area.is_in_group("projectile"):
 		_die()
 
 
-func _on_parry_area_entered(_area):
-	print("projectile incoming")
-	can_parry = true
-	projectile = $projectile
+func _on_parry_area_entered(area):
+	if area.is_in_group("projectile"):
+		if not is_on_floor():
+			if velocity.y > 0:
+				velocity.y += -500
+			else:
+				velocity.y += -100
+
+
+func _on_parry_window_timeout():
+	$Marker2D/Parry/CollisionShape2D.disabled = true
