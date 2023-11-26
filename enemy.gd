@@ -17,5 +17,9 @@ func _process(delta):
 		launch_timer = 0
 		_launch_projectile()
 
-func _on_area_2d_area_entered(_area):
+func _die():
 	queue_free()
+	
+func _on_area_2d_area_entered(area):
+	if area.is_in_group("projectile"):
+		_die()

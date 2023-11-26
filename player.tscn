@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfqfx52mqs3oe"]
+[gd_scene load_steps=6 format=3 uid="uid://cfqfx52mqs3oe"]
 
 [ext_resource type="Texture2D" uid="uid://d2m6ibjsipwig" path="res://Free/Main Characters/Ninja Frog/Jump (32x32).png" id="1_kdpl3"]
 [ext_resource type="Script" path="res://player.gd" id="1_ousl6"]
@@ -6,6 +6,8 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mvnwu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8pbj5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kmux2"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["Hitboxes"]]
 input_pickable = true
@@ -19,7 +21,27 @@ metadata/_edit_lock_ = true
 [node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
 texture = ExtResource("1_kdpl3")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CapsuleShape2D_8pbj5")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(21, 0)
+
+[node name="Parry" type="Area2D" parent="Marker2D"]
+position = Vector2(20, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/Parry"]
+position = Vector2(-20, 0)
+shape = SubResource("RectangleShape2D_kmux2")
+disabled = true
+
+[node name="Panel" type="Panel" parent="Marker2D/Parry/CollisionShape2D"]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="Marker2D/Parry" to="." method="_on_parry_area_entered"]

@@ -8,7 +8,7 @@
 [node name="enemy" type="Node2D" groups=["Hitboxes"]]
 script = ExtResource("1_op7ry")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["Enemy"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CapsuleShape2D_0x7g6")
